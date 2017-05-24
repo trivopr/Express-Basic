@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  meta(http-equiv="X-UA-Compatible", content="ie=edge")
+  title CREATE USER
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+  
+  script(src='https://code.jquery.com/jquery-3.2.1.js', integrity='sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=', crossorigin='anonymous')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+  script(src="/js/main.js")
+
+body
+  header
+    nav.navbar.navbar-default
+      .container-fluid
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1', aria-expanded='false')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') Brand
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a(href='#')
+                | Link 
+                span.sr-only (Home)
+            li
+              a(href='/users') Users List
+            li.active
+              a(href='/createuser') Create User
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                | Dropdown 
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href='#') Action
+                li
+                  a(href='#') Another action
+                li
+                  a(href='#') Something else here
+                li.divider(role='separator')
+                li
+                  a(href='#') Separated link
+                li.divider(role='separator')
+                li
+                  a(href='#') One more separated link
+          form.navbar-form.navbar-left
+            .form-group
+              input.form-control(type='text', placeholder='Search')
+            button.btn.btn-default(type='submit') Submit
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='#') Link
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                | Dropdown 
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href='#') Action
+                li
+                  a(href='#') Another action
+                li
+                  a(href='#') Something else here
+                li.divider(role='separator')
+                li
+                  a(href='#') Separated link
+  .container-fluid
+    h1 Register Form
+
+    section
+      -if(errors)
+        each err in errors
+          p.col-sm-8.col-sm-offset-4 #{err.msg}      
+
+      form.form-horizontal(method="Post" action="/users/add")
+        .form-group
+          label.col-sm-2.control-label FirstName
+          .col-sm-6
+            input.form-control(type="text", name="firstname")
+
+        .form-group
+          label.col-sm-2.control-label LastName
+          .col-sm-6
+            input.form-control(type="text", name="lastname")
+
+        .form-group
+          label.col-sm-2.control-label Email
+          .col-sm-6
+            input.form-control(type="email", name="email")            
+        .form-group
+          label.col-sm-2
+          label.col-sm-5
+            button.btn.btn-default(type='button', name="reset") Reset
+            span &nbsp;
+            button.btn.btn-default(type='submit', name="submit") Add
+
+    
+    section
+      #listuser
+        ul
+          each user in data
+            li #{user.first_name} &nbsp; 
+              a(href="#", data-id=`${user._id}`).deleteUser Delete

@@ -1,0 +1,16 @@
+{
+  "name": "Express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-validator": "^3.2.0",
+    "mongojs": "^2.4.0",
+    "mongoose": "^4.10.2",
+    "nodemon": "^1.11.0",
+    "path": "^0.12.7",
+    "pug": "^2.0.0-rc.1"
+  }
+}
