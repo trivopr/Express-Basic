@@ -20,15 +20,14 @@ $(document).ready(function() {
             deleteUser(idEl);
         });
 
-        function deleteUser(id) {
-            $.ajax({
-                url: '/users/delete/' + id,
-                type: 'DELETE'
 
-            }).done(function(result) {
+        // Request AJAX with AXIOS
+        function deleteUser(id) {
+            axios.delete('/users/delete/' + id).then(function(result) {
                 var $idListUser = $('#listuser');
                 var listUser = '';
-                $.each(result, function(k, v) {
+
+                $.each(result.data, function(k, v) {
                     listUser += `<li>${v.first_name}<a href="#" data-id="${v._id}" class="deleteUser">Delete</a></li>`;
                 });
                 listUser = '<ul>' + listUser + '</ul>';
@@ -36,9 +35,34 @@ $(document).ready(function() {
 
                 bindDeleteUser();
 
-            }).fail(function(err) {
+            }).catch(function(err) {
                 alert('FAILLL');
             });
         }
+
+
+
+        // REQUEST AJAX WITH JQUERY
+
+        // function deleteUser(id) {
+        //     $.ajax({
+        //         url: '/users/delete/' + id,
+        //         type: 'DELETE'
+
+        //     }).done(function(result) {
+        //         var $idListUser = $('#listuser');
+        //         var listUser = '';
+        //         $.each(result, function(k, v) {
+        //             listUser += `<li>${v.first_name}<a href="#" data-id="${v._id}" class="deleteUser">Delete</a></li>`;
+        //         });
+        //         listUser = '<ul>' + listUser + '</ul>';
+        //         $idListUser.html(listUser);
+
+        //         bindDeleteUser();
+
+        //     }).fail(function(err) {
+        //         alert('FAILLL');
+        //     });
+        // }
     }
 });
