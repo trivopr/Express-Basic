@@ -23,21 +23,23 @@ $(document).ready(function() {
 
         // Request AJAX with AXIOS
         function deleteUser(id) {
-            axios.delete('/users/delete/' + id).then(function(result) {
-                var $idListUser = $('#listuser');
-                var listUser = '';
+            axios.delete('/users/delete/' + id)
+                .then(function(result) {
+                    var $idListUser = $('#listuser');
+                    var listUser = '';
 
-                $.each(result.data, function(k, v) {
-                    listUser += `<li>${v.first_name}<a href="#" data-id="${v._id}" class="deleteUser">Delete</a></li>`;
+                    $.each(result.data, function(k, v) {
+                        listUser += `<li>${v.first_name}<a href="#" data-id="${v._id}" class="deleteUser">Delete</a></li>`;
+                    });
+                    listUser = '<ul>' + listUser + '</ul>';
+                    $idListUser.html(listUser);
+
+                    bindDeleteUser();
+
+                })
+                .catch(function(err) {
+                    alert('FAILLL');
                 });
-                listUser = '<ul>' + listUser + '</ul>';
-                $idListUser.html(listUser);
-
-                bindDeleteUser();
-
-            }).catch(function(err) {
-                alert('FAILLL');
-            });
         }
 
 
